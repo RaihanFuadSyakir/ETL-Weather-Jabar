@@ -1,0 +1,299 @@
+[
+    {
+        "id": 3088089,
+        "central_city": "Soreang",
+        "city" : "Kabupaten Bandung",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -7.03,
+        "lon": 107.52,
+        "url": "soreang-west-java-indonesia"
+    },
+    {
+        "id": 3043100,
+        "central_city": "Ngamprah",
+        "city" : "Kabupaten Bandung Barat",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.8,
+        "lon": 107.28,
+        "url": "ngamprah-west-java-indonesia"
+    },
+    {
+        "id": 3088074,
+        "central_city": "Cikarang",
+        "city" : "Kabupaten Bekasi",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.26,
+        "lon": 107.15,
+        "url": "cikarang-west-java-indonesia"
+    },
+    {
+        "id": 3088096,
+        "central_city": "Cibinong",
+        "city": "Kabupaten Bogor",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.48,
+        "lon": 106.85,
+        "url": "cibinong-west-java-indonesia"
+    },
+    {
+        "id": 3088082,
+        "central_city": "Ciamis",
+        "city": "Kabupaten Ciamis",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -7.33,
+        "lon": 108.35,
+        "url": "ciamis-west-java-indonesia"
+    },
+    {
+        "id": 3088064,
+        "central_city": "Ciranjang-Hilir",
+        "city": "Kabupaten Cianjur",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.82,
+        "lon": 107.26,
+        "url": "ciranjang-hilir-west-java-indonesia"
+    },
+    {
+        "id": 3088072,
+        "central_city": "Sumber",
+        "city": "Kabupaten Cirebon",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.76,
+        "lon": 108.48,
+        "url": "sumber-west-java-indonesia"
+    },
+    {
+        "id": 3088052,
+        "city": "Wanaraja",
+        "original" : {
+          "central_city" : "Tarogong Kidull",
+          "city" : "Kabupaten Garut",
+          "lat" : -7.198255,
+          "lon" : 107.889024
+        },
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -7.18,
+        "lon": 107.98,
+        "url": "wanaraja-west-java-indonesia"
+    },
+    {
+        "id": 3088081,
+        "central_city": "Indramayu",
+        "city": "Kabupaten Indramayu",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.33,
+        "lon": 108.32,
+        "url": "indramayu-west-java-indonesia"
+    },
+    {
+        "id": 3088098,
+        "city": "Rengasdengklok",
+        "original" : {
+          "central_city" : "Karawang",
+          "city" : "Kabupaten Karawang",
+          "lat" : -6.307245,
+          "lon" : 107.298861
+        },
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.16,
+        "lon": 107.3,
+        "url": "rengasdengklok-west-java-indonesia"
+    },
+    {
+        "id": 3088061,
+        "central_city": "Kuningan",
+        "city": "Kabupaten Kuningan",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.98,
+        "lon": 108.48,
+        "url": "kuningan-west-java-indonesia"
+    },
+    {
+        "id": 3088067,
+        "central_city": "Majalengka",
+        "city": "Kabupaten Majalengka",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.84,
+        "lon": 108.23,
+        "url": "majalengka-west-java-indonesia"
+    },
+    {
+        "id": 3086245,
+        "central_city": "Karangmulyan",
+        "city": "Karangmulyan",
+        "original" : {
+          "central_city" : "Parigi",
+          "city" : "Kabupaten Pangandaran",
+          "lat" : -7.652557,
+          "lon" : 108.509551
+        },
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -7.66,
+        "lon": 108.51,
+        "url": "karangmulyan-west-java-indonesia"
+    },
+    {
+        "id": 3088102,
+        "central_city": "Purwakarta",
+        "city": "Kabupaten Purwakarta",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.56,
+        "lon": 107.44,
+        "url": "purwakarta-west-java-indonesia"
+    },
+    {
+        "id": 3051153,
+        "city": "Pelabuan",
+        "original" : {
+          "central_city" : "Subang",
+          "city" : "Kabupaten Subang",
+          "lat" : -6.567426,
+          "lon" : 107.760747
+        },
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.57,
+        "lon": 107.76,
+        "url": "pelabuan-west-java-indonesia"
+    },
+    {
+        "id": 3088056,
+        "central_city": "Pelabuhanratu",
+        "city": "Kabupaten Sukabumi",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.99,
+        "lon": 106.55,
+        "url": "pelabuhanratu-west-java-indonesia"
+    },
+    {
+        "id": 2877770,
+        "central_city": "Sumedang Utara",
+        "city": "Kabupaten Sumedang",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.85,
+        "lon": 107.92,
+        "url": "sumedang-utara-indonesia-general-indonesia"
+    },
+    {
+        "id": 3088058,
+        "central_city": "Singaparna",
+        "city": "Kabupaten Tasikmalaya",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -7.35,
+        "lon": 108.11,
+        "url": "singaparna-west-java-indonesia"
+    },
+    {
+        "id": 3088111,
+        "central_city": "Bandung",
+        "city": "Kota Bandung",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.9,
+        "lon": 107.62,
+        "url": "bandung-west-java-indonesia"
+    },
+    {
+        "id": 3086640,
+        "central_city": "Pintusinga",
+        "city": "Kota Banjar",
+        "original" : {
+          "central_city" : "Banjar",
+          "city" : "Kota Banjar",
+          "lat" : -7.37,
+          "lon" : 108.53
+        },
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -7.37,
+        "lon": 108.52,
+        "url": "pintusinga-west-java-indonesia"
+    },
+    {
+        "id": 3088110,
+        "central_city": "Bekasi",
+        "city": "Kota Bekasi",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.24,
+        "lon": 106.99,
+        "url": "bekasi-west-java-indonesia"
+    },
+    {
+        "id": 3088107,
+        "central_city": "Bogor",
+        "city": "Kota Bogor",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.59,
+        "lon": 106.79,
+        "url": "bogor-west-java-indonesia"
+    },
+    {
+        "id": 3088106,
+        "central_city": "Cimahi",
+        "city": "Kota Cimahi",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.87,
+        "lon": 107.54,
+        "url": "cimahi-west-java-indonesia"
+    },
+    {
+        "id": 3088103,
+        "central_city": "Cirebon",
+        "city": "Kota Cirebon",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.71,
+        "lon": 108.56,
+        "url": "cirebon-west-java-indonesia"
+    },
+    {
+        "id": 3088109,
+        "central_city": "Depok",
+        "city": "Kota Depok",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.4,
+        "lon": 106.82,
+        "url": "depok-west-java-indonesia"
+    },
+    {
+        "id": 3088105,
+        "central_city": "Sukabumi",
+        "city": "Kota Sukabumi",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -6.92,
+        "lon": 106.93,
+        "url": "sukabumi-west-java-indonesia"
+    },
+    {
+        "id": 3088104,
+        "central_city": "Tasikmalaya",
+        "city": "Kota Tasikmalaya",
+        "region": "West Java",
+        "country": "Indonesia",
+        "lat": -7.33,
+        "lon": 108.22,
+        "url": "tasikmalaya-west-java-indonesia"
+    }
+]

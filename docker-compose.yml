@@ -13,7 +13,11 @@ services:
 
   # Airflow scheduler + webserver
   airflow:
-    image: apache/airflow:2.9.0
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+    env_file:
+      - .env
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
@@ -23,12 +27,12 @@ services:
       - ./dags:/opt/airflow/dags
     ports:
       - "8201:8080"  # Airflow Web UI
-    depends_on:
-      - postgres
     command: >
       bash -c "airflow db init &&
                airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com &&
                airflow webserver & airflow scheduler"
+    depends_on:
+      - postgres
     networks:
       - etl-net
 
@@ -69,7 +73,6 @@ services:
   # ETL data storage (NoSQL)
   mongodb:
     image: mongo:7.0
-    container_name: mongodb
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -80,7 +83,20 @@ services:
       - mongo_data:/data/db
     networks:
       - etl-net
-
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    working_dir: /app
+    volumes:
+      - ./run-once:/app  # mount your current folder
+      - ./master_data:/app/master_data
+    env_file:
+      - .env
+    stdin_open: true  # keep STDIN open
+    tty: true         # allocate a pseudo-TTY
+    networks:
+      - etl-net
 volumes:
   postgres_data:
   grafana_data:

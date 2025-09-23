@@ -1,0 +1,16 @@
+
+# Use Python 3.9 slim image
+FROM apache/airflow:2.9.0
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy requirements file (optional)
+COPY requirements.txt .
+
+# Copy your Python scripts (optional)
+# COPY . .
+
+# Install pymongo
+RUN pip install -r requirements.txt
+
