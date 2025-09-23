@@ -69,18 +69,7 @@ services:
       - etl-net
     volumes:
       - grafana_data:/var/lib/grafana
-  node_exporter:
-    image: prom/node-exporter:latest
-    restart: always
-    ports:
-      - "8106:9100"
-    volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
-    networks:
-      - etl-net
-    # ETL data storage (NoSQL)
+  # ETL data storage (NoSQL)
   mongodb:
     image: mongo:7.0
     restart: always
