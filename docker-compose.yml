@@ -42,14 +42,14 @@ services:
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
-      - "9101:9090"
+      - "8203:9090"
     networks:
       - etl-net
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     ports:
-      - "8081:8080"
+      - "8204:8080"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
@@ -61,7 +61,7 @@ services:
   grafana:
     image: grafana/grafana:10.0.0
     ports:
-      - "9102:3000"
+      - "8205:3000"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
@@ -78,7 +78,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     ports:
-      - "8102:27017"
+      - "8202:27017"
     volumes:
       - mongo_data:/data/db
     networks:
