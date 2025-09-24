@@ -192,14 +192,27 @@ default_args = {
     "retries": 1,
     "retry_delay": timedelta(minutes=1),
 }
-
+date_start = {
+    "year": int(os.getenv("DATE_START_YEAR", 2025)),
+    "month": int(os.getenv("DATE_START_MONTH", 1)),
+    "day": int(os.getenv("DATE_START_DAY", 1)),
+    "hour": int(os.getenv("DATE_START_HOUR", 0)),
+    "minute": int(os.getenv("DATE_START_MINUTE", 0)),
+    "second": int(os.getenv("DATE_START_SECOND", 0)),
+}
 with DAG(
     "fetch_weather_dag",
     default_args=default_args,
     description="Fetch weather concurrently and save to MongoDB",
     schedule="*/10 * * * *",  # run exactly every 10 minutes
     #schedule="@daily", #for debug purpose
-    start_date= datetime(2025, 9, 24,20,0,0),
+    start_date= datetime(date_start["year"], 
+                         date_start["month"],
+                         date_start["day"],
+                         date_start["hour"],
+                         date_start["minute"],
+                         date_start["second"]
+    ),
     catchup=True
 ) as dag:
 
