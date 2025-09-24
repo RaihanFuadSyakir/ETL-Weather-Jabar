@@ -198,7 +198,7 @@ default_args = {
 
 # HARD CODED date_start
 date_start = {
-    "year": 2023,
+    "year": 2025,
     "month": 8,
     "day": 1,
     "hour": 0,
