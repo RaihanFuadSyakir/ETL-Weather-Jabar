@@ -11,6 +11,7 @@ import pytz
 import itertools
 from pprint import pprint
 import logging
+import json
 logging.getLogger("pymongo").setLevel(logging.INFO)
 jakarta_tz = pytz.timezone("Asia/Jakarta")
 max_workers = os.cpu_count() or 1
@@ -192,14 +193,12 @@ default_args = {
     "retries": 1,
     "retry_delay": timedelta(minutes=1),
 }
-date_start = {
-    "year": int(os.getenv("DATE_START_YEAR", 2025)),
-    "month": int(os.getenv("DATE_START_MONTH", 1)),
-    "day": int(os.getenv("DATE_START_DAY", 1)),
-    "hour": int(os.getenv("DATE_START_HOUR", 0)),
-    "minute": int(os.getenv("DATE_START_MINUTE", 0)),
-    "second": int(os.getenv("DATE_START_SECOND", 0)),
-}
+with open("config.json", "r") as f:
+    config = json.load(f)
+if "date_start" not in config:
+    raise Exception("date_start not found in config.json")
+date_start = config["date_start"]
+
 with DAG(
     "fetch_weather_dag",
     default_args=default_args,
