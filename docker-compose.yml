@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: airflow
       POSTGRES_DB: airflow
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
     networks:
       - etl-net
 
@@ -23,6 +23,7 @@ services:
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       AIRFLOW__WEBSERVER__RBAC: "True"
       AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      AIRFLOW__CORE__DEFAULT_TIMEZONE : "Asia/Jakarta"
     volumes:
       - ./dags:/opt/airflow/dags
     ports:
@@ -79,7 +80,7 @@ services:
     ports:
       - "8202:27017"
     volumes:
-      - mongo_data:/data/db
+      - ./mongo_data:/data/db
     networks:
       - etl-net
   python:
