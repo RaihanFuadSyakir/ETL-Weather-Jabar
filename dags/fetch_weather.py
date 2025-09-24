@@ -28,12 +28,21 @@ collection = db["raw_weather"]
 # Example API function
 def fetch_current_weather(id):
     url = f"https://api.weatherapi.com/v1/current.json?key={API_KEY}&q=id:{id}"
-    response = requests.get(url, timeout=5)
-    return response.json(),id
+    try:
+        response = requests.get(url, timeout=5)
+        return response.json(),id
+    except Exception as e:
+        print(e)
+    return None,id
 
-def fetch_history_weather(id,timestamp):
+
+def fetch_history_weather(id,timestamp,hour):
     unix_timestamp = int(timestamp.timestamp())
-    url = f"https://api.weatherapi.com/v1/history.json?key={API_KEY}&q=id:{id}&unixdt={unix_timestamp}&unixend_dt={unix_timestamp}"
+    url = f"https://api.weatherapi.com/v1/history.json?key={API_KEY}"
+    url += f"&q=id:{id}"
+    url += f"&unixdt={unix_timestamp}"
+    url += f"&unixend_dt={unix_timestamp}"
+    url += f"&hour={timestamp.hour}"
     print(f'url : {url}')
     try:
         response = requests.get(url, timeout=5)
@@ -43,7 +52,7 @@ def fetch_history_weather(id,timestamp):
     return None,id,timestamp
 
 
-def process_result_history(result,ts,loc_id,day_locs):
+def process_result_history(dag_times,result,ts,loc_id,day_locs):
     if result is None:
         return None
     if "error" in result:
@@ -66,8 +75,7 @@ def process_result_history(result,ts,loc_id,day_locs):
             continue
         new_data = {}
         new_data["created_at"] = datetime.now(jakarta_tz).strftime("%Y-%m-%d %H:%M:%S")
-        created_for = datetime.strptime(hour_data["time"], "%Y-%m-%d %H")
-        new_data["created_for"] = created_for.strftime("%Y-%m-%d %H:%M:%S")
+        new_data["dag_times"] = dag_times
         new_data["fetch_method"] = "history"
         new_data["location"] = result["location"]
         new_data["location"]["id"] = loc_id
@@ -75,15 +83,15 @@ def process_result_history(result,ts,loc_id,day_locs):
         datas.append(new_data)
     return datas
 
-def fetch_and_store_history_data(timestamp):
+def fetch_and_store_history_data(dag_times,timestamp,hour):
     master_location_cursor = db["master_location"].find({}, {"_id": 0, "id": 1})
     # Convert to a list of ids
     location_ids = [doc["id"] for doc in master_location_cursor]
     print(f'location to be fetched : {location_ids}')
-    day = timestamp.strftime("%Y-%m-%d")
+    day = timestamp.strftime("%Y-%m-%d %H")
     print(f'regex day : {day}')
     filter = {
-            "current.time": {"$regex": "2025-09-22"},   # matches "2025-09-24 00" to "2025-09-24 23"
+            "current.time": {"$regex": f"^{day}"},   # matches "2025-09-24 00" to "2025-09-24 23"
             "location.id": {"$in": location_ids}     # only specific location IDs
     }
     projection = {"_id": 0, "current.time": 1, "location.id": 1}
@@ -97,19 +105,22 @@ def fetch_and_store_history_data(timestamp):
     print(f'current stored data : {list_result}')
     print(f'hashmap stored data : {day_locs}')
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        for result,loc,ts in executor.map(fetch_history_weather, location_ids,itertools.repeat(timestamp)):
-            processed = process_result_history(result,ts,loc,day_locs)
+        for result,loc,ts in executor.map(fetch_history_weather, 
+                                        location_ids,
+                                          itertools.repeat(timestamp),
+                                          itertools.repeat(hour)):
+            processed = process_result_history(dag_times,result,ts,loc,day_locs)
             if processed is not None and len(processed) > 0:
                 print(f'inserted : {len(processed)} at : {timestamp.strftime("%Y-%m-%d %H:%M:%S")}')
                 collection.insert_many(processed)
             else:
                 print("inserted : 0")
 
-def process_result_current(result,ts,loc_id):
+def process_result_current(dag_times,result,ts,loc_id):
     # Add created_at timestamp (Asia/Jakarta, UTC+7)
     new_data = {}
     new_data["created_at"] = datetime.now(jakarta_tz).strftime("%Y-%m-%d %H:%M:%S")
-    new_data["created_for"] = ts.strftime("%Y-%m-%d %H:%M:%S")
+    new_data["dag_times"] = dag_times
     new_data["fetch_method"] = "current"
     new_data["location"] = result["location"]
     new_data["location"]["id"] = loc_id
@@ -120,14 +131,14 @@ def process_result_current(result,ts,loc_id):
         return None
     return new_data
 # Concurrent fetch + save
-def fetch_and_store(timestamp):
+def fetch_and_store(dag_times,timestamp):
     master_location_cursor = db["master_location"].find({}, {"_id": 0, "id": 1})
     # Convert to a list of ids
     location_ids = [doc["id"] for doc in master_location_cursor]
     print(f'location to be fetched : {location_ids}')
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         for result,loc in executor.map(fetch_current_weather, location_ids):
-            processed = process_result_current(result,timestamp,loc)
+            processed = process_result_current(dag_times,result,timestamp,loc)
             if processed is not None:
                 collection.insert_one(processed)
 
@@ -161,23 +172,25 @@ def is_catchup_run(context):
 
 def process(**context):
     is_follow_up_run = is_catchup_run(context)
-    date = context["dag_run"].logical_date.astimezone(pytz.timezone("Asia/Jakarta"))
-    date_formatted = date.strftime('%Y-%m-%d %H:%M:%S')
+    dag_times = {}
+    dag_times["start"] = context["data_interval_start"].astimezone(pytz.timezone("Asia/Jakarta")).strftime("%Y-%m-%d %H:%M:%S")
+    dag_times["end"] = context["data_interval_end"].astimezone(pytz.timezone("Asia/Jakarta")).strftime("%Y-%m-%d %H:%M:%S")
+    date = context["dag_run"].logical_date.astimezone(pytz.timezone("Asia/Jakarta")) 
+    dag_times["logical_date"] = date.strftime("%Y-%m-%d %H:%M:%S")
     if is_follow_up_run:
-        if date.hour != 0 or date.minute != 0:
-            print(f"no execute at {date_formatted} it should be done at daily midnight")
+        if date.minute != 0:
+            print(f"no execute at {dag_times['logical_date']} it should be done hourly")
             return
-        print(f"executed at {date_formatted}")
-        date_and_half = date + timedelta(hours=12)
-        fetch_and_store_history_data(date_and_half)
+        print(f"executed at {dag_times['logical_date']}")
+        fetch_and_store_history_data(dag_times,date,date.hour)
     else:
-        fetch_and_store(date)
+        fetch_and_store(dag_times,date)
 
 default_args = {
     "owner": "airflow",
     "depends_on_past": False,
     "retries": 1,
-    "retry_delay": timedelta(minutes=5),
+    "retry_delay": timedelta(minutes=1),
 }
 
 with DAG(
@@ -186,7 +199,7 @@ with DAG(
     description="Fetch weather concurrently and save to MongoDB",
     schedule="*/10 * * * *",  # run exactly every 10 minutes
     #schedule="@daily", #for debug purpose
-    start_date= datetime(2025, 9, 24,0,0,0),
+    start_date= datetime(2025, 9, 24,20,0,0),
     catchup=True
 ) as dag:
 
