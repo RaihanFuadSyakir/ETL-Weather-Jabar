@@ -6,11 +6,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Bandung",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Soreang,_Bandung&language=id&params=7.0286259152964_S_107.52366171194_E_type:city(117587)_region:ID-JB"
-          "central_city" : "Soreang"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Soreang,_Bandung&language=id&params=7.0286259152964_S_107.52366171194_E_type:city(117587)_region:ID-JB",
+          "central_city" : "Soreang",
           "lat" : -7.028626,
           "lon" : 107.523662
-        }
+        },
         "country": "Indonesia",
         "lat": -7.03,
         "lon": 107.52,
@@ -23,11 +23,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Bandung_Barat",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Ngamprah,_Bandung_Barat&language=id&params=6.8578549719862_S_107.51291851779_E_type:city"
-          "central_city" : "Ngamprah"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Ngamprah,_Bandung_Barat&language=id&params=6.8578549719862_S_107.51291851779_E_type:city",
+          "central_city" : "Ngamprah",
           "lat" : -6.353575,
           "lon" : 107.186529
-        }
+        },
         "country": "Indonesia",
         "lat": -6.8,
         "lon": 107.28,
@@ -40,11 +40,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Bekasi",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Cikarang_Pusat,_Bekasi&language=id&params=6.3535748251497_S_107.18652895757_E_type:city"
-          "central_city" : "Cikarang Pusat"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Cikarang_Pusat,_Bekasi&language=id&params=6.3535748251497_S_107.18652895757_E_type:city",
+          "central_city" : "Cikarang Pusat",
           "lat" : -6.353575,
           "lon" : 107.186529
-        }
+        },
         "country": "Indonesia",
         "lat": -6.26,
         "lon": 107.15,
@@ -57,11 +57,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Bogor",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Cibinong,_Bogor&language=id&params=6.4660090304191_S_106.84830962367_E_type:city"
-          "central_city" : "Cibinong"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Cibinong,_Bogor&language=id&params=6.4660090304191_S_106.84830962367_E_type:city",
+          "central_city" : "Cibinong",
           "lat" : -6.466009,
           "lon" : 106.84831
-        }
+        },
         "country": "Indonesia",
         "lat": -6.48,
         "lon": 106.85,
@@ -74,11 +74,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Ciamis",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Ciamis,_Ciamis&language=id&params=7.3302872395513_S_108.34082879583_E_type:city"
-          "central_city" : "Ciamis"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Ciamis,_Ciamis&language=id&params=7.3302872395513_S_108.34082879583_E_type:city",
+          "central_city" : "Ciamis",
           "lat" : -7.330287,
           "lon" : 108.340829
-        }
+        },
         "country": "Indonesia",
         "lat": -7.33,
         "lon": 108.35,
@@ -91,11 +91,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Cianjur",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Cianjur,_Cianjur&language=id&params=6.8165665153995_S_107.13897282943_E_type:city"
-          "central_city" : "Cianjur"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Cianjur,_Cianjur&language=id&params=6.8165665153995_S_107.13897282943_E_type:city",
+          "central_city" : "Cianjur",
           "lat" : -6.816567,
           "lon" : 107.138973
-        }
+        },
         "country": "Indonesia",
         "lat": -6.82,
         "lon": 107.26,
@@ -108,11 +108,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Cirebon",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Sumber,_Cirebon&language=id&params=6.7487516020322_S_108.47115482895_E_type:city"
-          "central_city" : "Sumber"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Sumber,_Cirebon&language=id&params=6.7487516020322_S_108.47115482895_E_type:city",
+          "central_city" : "Sumber",
           "lat" : -6.748752,
           "lon" : 108.471155
-        }
+        },
         "country": "Indonesia",
         "lat": -6.76,
         "lon": 108.48,
@@ -125,11 +125,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Garut",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Tarogong_Kidul,_Garut&language=id&params=7.1982545288362_S_107.88902439159_E_type:city"
-          "central_city" : "Tarogong Kidul"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Tarogong_Kidul,_Garut&language=id&params=7.1982545288362_S_107.88902439159_E_type:city",
+          "central_city" : "Tarogong Kidul",
           "lat" : -7.198255,
           "lon" : 107.889024
-        }
+        },
         "country": "Indonesia",
         "lat": -7.18,
         "lon": 107.98,
@@ -142,11 +142,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Indramayu",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kabupaten_Indramayu&language=id&params=6.3269_S_108.3222_E_type:city(1980080)"
-          "central_city" : "Indramayu"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kabupaten_Indramayu&language=id&params=6.3269_S_108.3222_E_type:city(1980080)",
+          "central_city" : "Indramayu",
           "lat" : -6.3269,
           "lon" : 108.3222
-        }
+        },
         "country": "Indonesia",
         "lat": -6.33,
         "lon": 108.32,
@@ -159,11 +159,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Karawang",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Karawang_Barat,_Karawang&language=id&params=6.3072452878771_S_107.29886056411_E_type:city"
-          "central_city" : "Karawang Barat"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Karawang_Barat,_Karawang&language=id&params=6.3072452878771_S_107.29886056411_E_type:city",
+          "central_city" : "Karawang Barat",
           "lat" : -6.307245,
           "lon" : 107.298861
-        }
+        },
         "country": "Indonesia",
         "lat": -6.16,
         "lon": 107.3,
@@ -176,11 +176,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Kuningan",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kabupaten_Kuningan&language=id&params=6.9766048_S_108.4849021_E_type:city(1235854)"
-          "central_city" : "Kuningan"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kabupaten_Kuningan&language=id&params=6.9766048_S_108.4849021_E_type:city(1235854)",
+          "central_city" : "Kuningan",
           "lat" : -6.976605,
           "lon" : 108.484902
-        }
+        },
         "country": "Indonesia",
         "lat": -6.98,
         "lon": 108.48,
@@ -193,11 +193,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Majalengka",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Majalengka,_Majalengka&language=id&params=6_50_11.227_S_108_13_38.201_E_"
-          "central_city" : "Majalengka"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Majalengka,_Majalengka&language=id&params=6_50_11.227_S_108_13_38.201_E_",
+          "central_city" : "Majalengka",
           "lat" : -6.836452,
           "lon" : 108.227278
-        }
+        },
         "country": "Indonesia",
         "lat": -6.84,
         "lon": 108.23,
@@ -210,11 +210,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Pangandaran",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Parigi,_Pangandaran&language=id&params=7.6525565_S_108.5095509_E_type:city"
-          "central_city" : "Parigi"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Parigi,_Pangandaran&language=id&params=7.6525565_S_108.5095509_E_type:city",
+          "central_city" : "Parigi",
           "lat" : -7.652557,
           "lon" : 108.509551
-        }
+        },
         "country": "Indonesia",
         "lat": -7.66,
         "lon": 108.51,
@@ -227,11 +227,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Purwakarta",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Purwakarta,_Purwakarta&language=id&params=6.539170866659219_S_107.43598022269049_E_type:city"
-          "central_city" : "Purwakarta"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Purwakarta,_Purwakarta&language=id&params=6.539170866659219_S_107.43598022269049_E_type:city",
+          "central_city" : "Purwakarta",
           "lat" : -6.539171,
           "lon" : 107.43598
-        }
+        },
         "country": "Indonesia",
         "lat": -6.56,
         "lon": 107.44,
@@ -244,11 +244,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Subang",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Subang,_Subang&language=id&params=6.567426_S_107.760747_E_type:city"
-          "central_city" : "Subang"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Subang,_Subang&language=id&params=6.567426_S_107.760747_E_type:city",
+          "central_city" : "Subang",
           "lat" : -6.567426,
           "lon" : 107.760747
-        }
+        },
         "country": "Indonesia",
         "lat": -6.57,
         "lon": 107.76,
@@ -261,11 +261,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Sukabumi",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Palabuhanratu,_Sukabumi&language=id&params=6.988107879659_S_106.55009800424_E_type:city"
-          "central_city" : "Pelabuhanratu"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Palabuhanratu,_Sukabumi&language=id&params=6.988107879659_S_106.55009800424_E_type:city",
+          "central_city" : "Pelabuhanratu",
           "lat" : -6.988108,
           "lon" : 106.550098
-        }
+        },
         "country": "Indonesia",
         "lat": -6.99,
         "lon": 106.55,
@@ -278,11 +278,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Sumedang",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Sumedang_Utara,_Sumedang&language=id&params=6.853056_S_107.938889_E_type:city"
-          "central_city" : "Sumedang Utara"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Sumedang_Utara,_Sumedang&language=id&params=6.853056_S_107.938889_E_type:city",
+          "central_city" : "Sumedang Utara",
           "lat" : -6.853056,
           "lon" : 107.938889
-        }
+        },
         "country": "Indonesia",
         "lat": -6.85,
         "lon": 107.92,
@@ -295,11 +295,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kabupaten_Tasikmalaya",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kabupaten_Tasikmalaya&language=id&params=7.3658_S_108.1019_E_type:city(1996059)"
-          "central_city" : "Singaparna"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kabupaten_Tasikmalaya&language=id&params=7.3658_S_108.1019_E_type:city(1996059)",
+          "central_city" : "Singaparna",
           "lat" : -7.3658,
           "lon" : 108.1019
-        }
+       },
         "country": "Indonesia",
         "lat": -7.35,
         "lon": 108.11,
@@ -312,11 +312,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kota_Bandung",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Bandung&language=id&params=6.9218458_S_107.6070831_E_type:city(2591763)"
-          "central_city" : "Bandung"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Bandung&language=id&params=6.9218458_S_107.6070831_E_type:city(2591763)",
+          "central_city" : "Bandung",
           "lat" : -6.921846,
           "lon" : 107.607083
-        }
+        },
         "country": "Indonesia",
         "lat": -6.9,
         "lon": 107.62,
@@ -329,11 +329,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kota_Banjar",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Banjar&language=id&params=7.37_S_108.53_E_type:city(209317)"
-          "central_city" : "Kota Banjar"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Banjar&language=id&params=7.37_S_108.53_E_type:city(209317)",
+          "central_city" : "Kota Banjar",
           "lat" : -7.37,
           "lon" : 108.53
-        }
+        },
         "country": "Indonesia",
         "lat": -7.37,
         "lon": 108.52,
@@ -346,11 +346,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kota_Bekasi",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Bekasi&language=id&params=6.2333_S_107_E_type:city(2526133)"
-          "central_city" : "Kota Bekasi"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Bekasi&language=id&params=6.2333_S_107_E_type:city(2526133)",
+          "central_city" : "Kota Bekasi",
           "lat" : -6.2333,
           "lon" : 107
-        }
+        },
         "country": "Indonesia",
         "lat": -6.24,
         "lon": 106.99,
@@ -363,11 +363,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kota_Bogor",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Bogor&language=id&params=6.5978028_S_106.7992633_E_type:city(1144108)"
-          "central_city" : "Kota Bogor"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Bogor&language=id&params=6.5978028_S_106.7992633_E_type:city(1144108)",
+          "central_city" : "Kota Bogor",
           "lat" : -6.597803,
           "lon" : 106.799263
-        }
+        },
         "country": "Indonesia",
         "lat": -6.59,
         "lon": 106.79,
@@ -380,11 +380,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kota_Cimahi",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Cimahi&language=id&params=6.8800382_S_107.5385202_E_type:city(560512)"
-          "central_city" : "Kota Cimahi"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Cimahi&language=id&params=6.8800382_S_107.5385202_E_type:city(560512)",
+          "central_city" : "Kota Cimahi",
           "lat" : -6.880038,
           "lon" : 107.53852
-        }
+        },
         "country": "Indonesia",
         "lat": -6.87,
         "lon": 107.54,
@@ -397,11 +397,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kota_Cirebon",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Cirebon&language=id&params=6.7396903_S_108.5529678_E_type:city(354679)"
-          "central_city" : "Kota Cirebon"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Cirebon&language=id&params=6.7396903_S_108.5529678_E_type:city(354679)",
+          "central_city" : "Kota Cirebon",
           "lat" : -6.73969,
           "lon" : 108.552968
-        }
+        },
         "country": "Indonesia",
         "lat": -6.71,
         "lon": 108.56,
@@ -414,11 +414,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kota_Depok",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Depok&language=id&params=6.405031_S_106.8173077_E_type:city(2010912)"
-          "central_city" : "Kota Depok"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Depok&language=id&params=6.405031_S_106.8173077_E_type:city(2010912)",
+          "central_city" : "Kota Depok",
           "lat" : -6.405031,
           "lon" : 106.817308
-        }
+        },
         "country": "Indonesia",
         "lat": -6.4,
         "lon": 106.82,
@@ -431,11 +431,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kota_Sukabumi",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Sukabumi&language=id&params=6.9320004_S_106.9185638_E_type:city(353455)"
-          "central_city" : "Kota Sukabumi"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Sukabumi&language=id&params=6.9320004_S_106.9185638_E_type:city(353455)",
+          "central_city" : "Kota Sukabumi",
           "lat" : -6.932,
           "lon" : 106.918564
-        }
+        },
         "country": "Indonesia",
         "lat": -6.92,
         "lon": 106.93,
@@ -448,11 +448,11 @@
         "region": "West Java",
         "source" : {
           "general_info" : "https://id.wikipedia.org/wiki/Kota_Tasikmalaya",
-          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Tasikmalaya&language=id&params=7.3258023_S_108.2201805_E_type:city(761080)"
-          "central_city" : "Kota Tasikmalaya"
+          "location" : "https://geohack.toolforge.org/geohack.php?pagename=Kota_Tasikmalaya&language=id&params=7.3258023_S_108.2201805_E_type:city(761080)",
+          "central_city" : "Kota Tasikmalaya",
           "lat" : -7.325802,
           "lon" : 108.220181
-        }
+        },
         "country": "Indonesia",
         "lat": -7.33,
         "lon": 108.22,
