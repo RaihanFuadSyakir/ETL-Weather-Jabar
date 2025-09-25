@@ -10,7 +10,19 @@ services:
       - ./postgres_data:/var/lib/postgresql/data
     networks:
       - etl-net
-
+  # ETL data storage (NoSQL)
+  mongodb:
+    image: mongo:7.0
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "8202:27017"
+    volumes:
+      - ./mongo_data:/data/db
+    networks:
+      - etl-net
   # Airflow scheduler + webserver
   airflow:
     build:
@@ -37,66 +49,90 @@ services:
     networks:
       - etl-net
 
-  # Monitoring stack
-  prometheus:
-    image: prom/prometheus
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "8203:9090"
-    networks:
-      - etl-net
-
-  cadvisor:
-    image: gcr.io/cadvisor/cadvisor:latest
-    ports:
-      - "8204:8080"
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    networks:
-      - etl-net
-
-  grafana:
-    image: grafana/grafana:10.0.0
-    ports:
-      - "8205:3000"
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-    networks:
-      - etl-net
-    volumes:
-      - grafana_data:/var/lib/grafana
-  # ETL data storage (NoSQL)
-  mongodb:
-    image: mongo:7.0
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    ports:
-      - "8202:27017"
-    volumes:
-      - ./mongo_data:/data/db
-    networks:
-      - etl-net
-  python:
+  #spark containers
+  spark-master:
     build:
       context: .
-      dockerfile: Dockerfile.python
-    working_dir: /app
-    volumes:
-      - ./run-once:/app  # mount your current folder
-      - ./master_data:/app/master_data
+      dockerfile: Dockerfile.spark
     env_file:
       - .env
-    stdin_open: true  # keep STDIN open
-    tty: true         # allocate a pseudo-TTY
+    environment:
+      - SPARK_MODE=master
+    ports:
+      - "7077:7077"
+      - "8081:8080"
+    volumes:
+      - ./dags/spark:/opt/spark/dags
     networks:
       - etl-net
+  spark-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.spark
+    env_file:
+      - .env
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=4G
+      - SPARK_WORKER_CORES=2
+    volumes:
+      - ./dags/spark:/opt/spark/dags
+    depends_on:
+      - spark-master
+    networks:
+      - etl-net
+
+#  # Monitoring stack
+#  prometheus:
+#    image: prom/prometheus
+#    volumes:
+#      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+#    ports:
+#      - "8203:9090"
+#    networks:
+#      - etl-net
+#
+#  cadvisor:
+#    image: gcr.io/cadvisor/cadvisor:latest
+#    ports:
+#      - "8204:8080"
+#    volumes:
+#      - /:/rootfs:ro
+#      - /var/run:/var/run:ro
+#      - /sys:/sys:ro
+#      - /var/lib/docker/:/var/lib/docker:ro
+#    networks:
+#      - etl-net
+#
+#  grafana:
+#    image: grafana/grafana:10.0.0
+#    ports:
+#      - "8205:3000"
+#    environment:
+#      - GF_SECURITY_ADMIN_USER=admin
+#      - GF_SECURITY_ADMIN_PASSWORD=admin
+#    networks:
+#      - etl-net
+#    volumes:
+#      - grafana_data:/var/lib/grafana
+#
+#
+#
+#  python:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.python
+#    working_dir: /app
+#    volumes:
+#      - ./run-once:/app  # mount your current folder
+#      - ./master_data:/app/master_data
+#    env_file:
+#      - .env
+#    stdin_open: true  # keep STDIN open
+#    tty: true         # allocate a pseudo-TTY
+#    networks:
+#      - etl-net
 volumes:
   postgres_data:
   grafana_data:

@@ -1,0 +1,9 @@
+FROM bitnami/spark:3.5
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy requirements file (optional)
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
