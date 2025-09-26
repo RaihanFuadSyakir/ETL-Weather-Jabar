@@ -6,8 +6,8 @@ WORKDIR /app
 
 # Copy requirements file (optional)
 COPY requirements.txt .
-
-RUN pip install --cache-dir /tmp -r requirements.txt
+RUN pip install tqdm
+RUN pip install --no-cache-dir -r requirements.txt
 # Copy your Python scripts (optional)
 # COPY . .
 

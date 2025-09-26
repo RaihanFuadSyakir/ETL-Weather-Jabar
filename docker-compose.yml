@@ -120,20 +120,20 @@ services:
 #
 #
 #
-#  python:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile.python
-#    working_dir: /app
-#    volumes:
-#      - ./run-once:/app  # mount your current folder
-#      - ./master_data:/app/master_data
-#    env_file:
-#      - .env
-#    stdin_open: true  # keep STDIN open
-#    tty: true         # allocate a pseudo-TTY
-#    networks:
-#      - etl-net
+  python:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    working_dir: /app
+    volumes:
+      - ./run-once:/app  # mount your current folder
+      - ./master_data:/app/master_data
+    env_file:
+      - .env
+    stdin_open: true  # keep STDIN open
+    tty: true         # allocate a pseudo-TTY
+    networks:
+      - etl-net
 volumes:
   postgres_data:
   grafana_data:

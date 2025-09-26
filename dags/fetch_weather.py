@@ -10,9 +10,7 @@ import os
 import pytz
 import itertools
 from pprint import pprint
-import logging
 
-logging.getLogger("pymongo").setLevel(logging.INFO)
 jakarta_tz = pytz.timezone("Asia/Jakarta")
 
 # set max concurrent worker
