@@ -58,11 +58,12 @@ services:
       - .env
     environment:
       - SPARK_MODE=master
+      - SPARK_MASTER_HOST=0.0.0.0
     ports:
       - "7077:7077"
       - "8081:8080"
     volumes:
-      - ./dags/spark:/opt/spark/dags
+      - ./dags:/opt/airflow/dags
     networks:
       - etl-net
   spark-worker:

@@ -40,8 +40,9 @@ with DAG(
             application="/opt/airflow/dags/spark/transform_raw_weather.py",
             conn_id="spark_master",
             verbose=True,
-#            conf={
+            conf={
+                "spark.jars.ivy":"/tmp/.ivy"
 #                "spark.executor.memory": "2g",
 #                "spark.executor.cores": "1"
-#            },
+            },
         )
