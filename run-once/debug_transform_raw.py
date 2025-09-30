@@ -1,12 +1,11 @@
-
 from pymongo import MongoClient
+from bson import ObjectId
 from datetime import datetime
 from tqdm import tqdm
 import os
 from dotenv import load_dotenv
 # Load environment variables from .env (optional, if you use a .env file)
 load_dotenv()
-
 # --- MongoDB connection ---
 MONGO_URI = os.getenv("MONGO_URI")
 if not MONGO_URI:
@@ -16,18 +15,26 @@ client : MongoClient = MongoClient(MONGO_URI)
 db = client["weather"]   # replace with your DB name
 raw_collection = db["raw_weather"]
 data_collection = db["weather_data"]
+data_collection.create_index(
+    [("location_id", 1), ("timestamp", 1)],
+    unique=True,
+    name="locationid_timestamp_index"
+)
 def transform_raw_to_weather(docs):
     bulk_ops = []
     for d in tqdm(docs):
         c = d["current"]
         ts = None
         if d["fetch_method"] == "history":
-            ts = datetime.strptime(c["time"], "%Y-%m-%d %H:%M")
+            ts = datetime.strptime(d["dag_times"]["logical_date"], "%Y-%m-%d %H:%M:%S")
         else:
             ts = datetime.strptime(d["dag_times"]["end"], "%Y-%m-%d %H:%M:%S")
-
+        if "id" not in d["location"] or d["location"]["id"] is None:
+            tqdm.write(f"No id in location {d['_id']}")
+            continue
         clean_doc = {
-            "timestamp": ts,
+            "_id": ObjectId(d["_id"]),
+            "timestamp": ts.strftime("%Y-%m-%d %H:%M:%S"),
             "date": ts.strftime("%Y-%m-%d"),
             "hour": ts.strftime("%H:00"),
             "minute": ts.strftime("%H:%M"),
@@ -53,7 +60,7 @@ def transform_raw_to_weather(docs):
 
     if bulk_ops:
         data_collection.insert_many(bulk_ops)
-        print(f"Inserted {len(bulk_ops)} cleaned records into weather_data")
+        tqdm.write(f"Inserted {len(bulk_ops)} cleaned records into weather_data")
 
 
 # Example usage
