@@ -109,6 +109,7 @@ def process(**context):
         unique=True,
         name="locationid_timestamp_index"
     )
+    raw_collection.create_index("dag_times.end")
     # 2. Fetch unprocessed docs
     unprocessed = list(raw_collection.find(
         {
@@ -145,7 +146,8 @@ with DAG(
                          date_start["minute"],
                          date_start["second"]
     ),
-    catchup=True
+    catchup=True,
+    max_active_runs=2
 ) as dag:
     wait_for_fetch = ExternalTaskSensor(
         task_id="wait_for_fetch_weather",

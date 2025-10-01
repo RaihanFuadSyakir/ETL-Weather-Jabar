@@ -209,7 +209,8 @@ with DAG(
                          date_start["minute"],
                          date_start["second"]
     ),
-    catchup=True
+    catchup=True,
+    max_active_runs=2
 ) as dag:
 
     fetch_task = PythonOperator(
