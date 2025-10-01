@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 import os
 import pytz
 import itertools
-from pprint import pprint
-
+#from pprint import pprint
+from script_config import fetch_date_start
 jakarta_tz = pytz.timezone("Asia/Jakarta")
 
 # set max concurrent worker
@@ -34,6 +34,7 @@ def fetch_current_weather(id):
         return response.json(),id
     except Exception as e:
         print(e)
+        raise
     return None,id
 
 
@@ -178,10 +179,10 @@ def process(**context):
     dag_times["end"] = context["data_interval_end"].astimezone(pytz.timezone("Asia/Jakarta")).strftime("%Y-%m-%d %H:%M:%S")
     date = context["dag_run"].logical_date.astimezone(pytz.timezone("Asia/Jakarta")) 
     dag_times["logical_date"] = date.strftime("%Y-%m-%d %H:%M:%S")
+    if date.minute != 0:
+        print(f"no execute at {dag_times['logical_date']} it should be done hourly")
+        return
     if is_follow_up_run:
-        if date.minute != 0:
-            print(f"no execute at {dag_times['logical_date']} it should be done hourly")
-            return
         print(f"executed at {dag_times['logical_date']}")
         fetch_and_store_history_data(dag_times,date,date.hour)
     else:
@@ -194,15 +195,7 @@ default_args = {
     "retry_delay": timedelta(minutes=1),
 }
 
-# HARD CODED date_start
-date_start = {
-    "year": 2025,
-    "month": 8,
-    "day": 1,
-    "hour": 0,
-    "minute": 0,
-    "second": 0
-}
+date_start = fetch_date_start
 with DAG(
     "fetch_weather_dag",
     default_args=default_args,

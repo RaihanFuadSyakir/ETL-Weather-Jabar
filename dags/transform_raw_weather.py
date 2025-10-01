@@ -2,12 +2,14 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.sensors.external_task import ExternalTaskSensor
 from pymongo import MongoClient, DeleteMany
+from pymongo.errors import BulkWriteError
 from typing import Any, Mapping, Sequence, cast
 from bson import ObjectId
 from datetime import datetime, timedelta
 import os
 import pytz
 from dotenv import load_dotenv
+from script_config import fetch_date_start
 # Load environment variables from .env (optional, if you use a .env file)
 load_dotenv()
 # --- MongoDB connection ---
@@ -58,9 +60,20 @@ def transform_raw_to_weather(docs):
         bulk_ops.append(clean_doc)
 
     if bulk_ops:
-        data_collection.insert_many(bulk_ops)
-        print(f"Inserted {len(bulk_ops)} cleaned records into weather_data")
+        try:
+            data_collection.insert_many(bulk_ops)
+            print(f"Inserted {len(bulk_ops)} cleaned records into weather_data")
+        except BulkWriteError as bwe:
+            print("Bulk write error occurred!")
+            
+            # Full error dict
+            details = bwe.details
+            print(details)
 
+            # Handle duplicates specifically
+            for err in details.get("writeErrors", []):
+                if err.get("code") == 11000:
+                    print("Duplicate key error at index:", err.get("index"))
 def delete_duplicate_on_raw():
     pipeline = [
         {
@@ -90,8 +103,6 @@ def delete_duplicate_on_raw():
         print("No duplicates found")
 def process(**context):
     dag_interval_end = context["data_interval_end"].astimezone(pytz.timezone("Asia/Jakarta"))
-    time_gap = timedelta(minutes=20)
-    start_time = dag_interval_end - time_gap
     delete_duplicate_on_raw()
     data_collection.create_index(
         [("location_id", 1), ("timestamp", 1)],
@@ -101,12 +112,8 @@ def process(**context):
     # 2. Fetch unprocessed docs
     unprocessed = list(raw_collection.find(
         {
-            "dag_times.end":{
-                "$gte": start_time.strftime("%Y-%m-%d %H:%M:%S"), 
-                "$lt": dag_interval_end.strftime("%Y-%m-%d %H:%M:%S")
-            }
-        }, 
-        {"_id": 1}
+            "dag_times.end": dag_interval_end.strftime("%Y-%m-%d %H:%M:%S")
+        }
     ))
 
     if not unprocessed:
@@ -124,17 +131,9 @@ default_args = {
     "retry_delay": timedelta(minutes=1),
 }
 
-# HARD CODED date_start
-date_start = {
-    "year": 2025,
-    "month": 8,
-    "day": 1,
-    "hour": 0,
-    "minute": 0,
-    "second": 0
-}
+date_start = fetch_date_start
 with DAG(
-    "transform_weather",
+    "transform_weather_dag",
     default_args=default_args,
     description="process data from raw_weather and save to MongoDB",
     schedule="*/10 * * * *",  # run exactly every 10 minutes
@@ -148,7 +147,6 @@ with DAG(
     ),
     catchup=True
 ) as dag:
-
     wait_for_fetch = ExternalTaskSensor(
         task_id="wait_for_fetch_weather",
         external_dag_id="fetch_weather_dag",

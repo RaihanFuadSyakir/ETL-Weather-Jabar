@@ -22,9 +22,9 @@ date_start = {
     "second": 0
 }
 with DAG(
-    "transform_raw_dag",
+    "unused_spark_transform_raw_dag",
     default_args=default_args,
-    description="Process raw data from raw_weather",
+    description="Process raw data from raw_weather using spark",
     schedule=None,
     #schedule="@daily", #for debug purpose
     start_date= datetime(date_start["year"], 
