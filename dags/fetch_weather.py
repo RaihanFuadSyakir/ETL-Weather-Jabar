@@ -182,6 +182,7 @@ def process(**context):
     if date.minute != 0:
         print(f"no execute at {dag_times['logical_date']} it should be done hourly")
         return
+    collection.create_index("dag_times.end")
     if is_follow_up_run:
         print(f"executed at {dag_times['logical_date']}")
         fetch_and_store_history_data(dag_times,date,date.hour)
