@@ -37,8 +37,8 @@ def transform_raw_to_weather(docs):
             "_id": ObjectId(d["_id"]),
             "timestamp": ts.strftime("%Y-%m-%d %H:%M:%S"),
             "date": ts.strftime("%Y-%m-%d"),
-            "hour": ts.strftime("%H:00"),
-            "minute": ts.strftime("%H:%M"),
+            "hour": ts.strftime("%H"),
+            "minute": ts.strftime("%M"),
             "location_id": d["location"]["id"],
             "location_name": d["location"]["name"],
             "lat": d["location"]["lat"],
@@ -109,7 +109,6 @@ def process(**context):
         unique=True,
         name="locationid_timestamp_index"
     )
-    raw_collection.create_index("dag_times.end")
     # 2. Fetch unprocessed docs
     unprocessed = list(raw_collection.find(
         {
@@ -154,7 +153,7 @@ with DAG(
         external_dag_id="fetch_weather_dag",
         external_task_id="fetch_weather",
         timeout=600,       # give up after 10 minutes if not done
-        poke_interval=20,  # check every 60s
+        poke_interval=20,
         mode="poke",       # or "reschedule" to free up workers
     )
     transform_data = PythonOperator(
