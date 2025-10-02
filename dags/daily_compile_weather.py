@@ -33,18 +33,33 @@ for doc in master_location:
 
 def generate_minutes_data_points(hourly_data):
     minutes_data_points = []
-    for hour in range(24):
-        hour_str = f"{hour:02d}:00"
-        values = hourly_data.get(hour_str, [])
-        if values:
-            for value in values:
-                minutes_data_points.append(value)
+    for m in range(0, 60, 10):
+        minute_str = f"{m:02d}"
+        match = next((v for v in hourly_data if v["minute"] == minute_str), None)
+        if match:
+            dp = {
+                "minute": minute_str,
+                "temp": match["temp_c"],
+                "humidity": match["humidity"],
+                "wind_kph": match["wind_kph"],
+                "wind_dir": match["wind_dir"],
+                "precip_mm": match["precip_mm"],
+            }
+        else:
+            dp = {
+                "minute": minute_str,
+                "temp": None,
+                "humidity": None,
+                "wind_kph": None,
+                "wind_dir": None,
+                "precip_mm": None,
+            }
+        minutes_data_points.append(dp) 
     return minutes_data_points
 
 def generate_hourly_data_point(hourly_data, hour_str, is_full_recap, minutes_data_points):
-    values = hourly_data.get(hour_str, [])
     hour_doc = None
-    if values:
+    if hourly_data:
         temps = [v["temp"] for v in minutes_data_points if v["temp"] is not None]
         humidities = [v["humidity"] for v in minutes_data_points if v["humidity"] is not None] 
         winds = [v["wind_kph"] for v in minutes_data_points if v["wind_kph"] is not None] 
@@ -53,12 +68,13 @@ def generate_hourly_data_point(hourly_data, hour_str, is_full_recap, minutes_dat
         hour_doc = {
             "hour": hour_str,
             "full_recap": is_full_recap,
-            "temp_avg": round(statistics.mean(temps), 2),
-            "temp_min": min(temps),
-            "temp_max": max(temps),
-            "humidity_avg": round(statistics.mean(humidities), 2),
-            "wind_avg_kph": round(statistics.mean(winds), 2),
-            "dominant_wind_dir": statistics.mode(wind_dir),
+            "temp_avg": round(statistics.mean(temps), 2) if len(temps) > 0 else None,
+            "temp_min": min(temps) if len(temps) > 0 else None,
+            "temp_max": max(temps) if len(temps) > 0 else None,
+            "humidity_avg": round(statistics.mean(humidities), 2) if len(humidities) > 0 else None,
+            "wind_avg_kph": round(statistics.mean(winds), 2) if len(winds) > 0 else None,
+            "dominant_wind_dir": statistics.mode(wind_dir)if len(wind_dir) > 0 else None,
+
             "precip_mm": sum(precip_mm),
             "data_points": minutes_data_points
         }
@@ -88,12 +104,14 @@ def build_summary(date: str, location_id: int):
         return None
     is_full_recap = False
     hourly_data : dict = {}
-    for record in records:
-        hour = record["hour"]
-        if hour not in hourly_data:
-            hourly_data[hour] = []
-        hourly_data[hour].append(record)
-    if len(hourly_data) < 24:
+    for hour in range(24):
+        hour_doc : dict = {}
+        hour_str = f"{hour:02d}"
+        data_records = [v for v in records if v["hour"] == hour_str]
+        if len(data_records) > 0:
+            hourly_data[hour_str] = data_records
+    
+    if  "23" in hourly_data:
         is_full_recap = True
 
     # ---- Hourly aggregates ----
@@ -101,9 +119,11 @@ def build_summary(date: str, location_id: int):
     # Create fixed structure: 24 hours × 6 slots (00,10,20,30,40,50)
     for hour in range(24):
         hour_doc = {}
-        hour_str = f"{hour:02d}:00"
-        minutes_data_points = generate_minutes_data_points(hourly_data)
-        hour_doc = generate_hourly_data_point(hourly_data, hour_str, is_full_recap, minutes_data_points)
+        hour_str = f"{hour:02d}"
+        if hour_str not in hourly_data:
+            continue
+        minutes_data_points = generate_minutes_data_points(hourly_data[hour_str])
+        hour_doc = generate_hourly_data_point(hourly_data[hour_str], hour_str, is_full_recap, minutes_data_points)
         hourly_list.append(hour_doc)
     # ---- Final summary doc ----
     doc = {
@@ -129,6 +149,10 @@ def process(**context):
     for loc in location_ids:
         build_summary(date, loc)
 date_start = fetch_date_start
+
+def map_to_midnight(execution_date, **context):
+    # move forward 1 day to match the transform at 00:00 of the same day
+    return execution_date + timedelta(days=1)
 with DAG(
     "generate_daily_recap_dag",
     schedule="0 0 * * *",  # run daily at midnight
@@ -148,7 +172,8 @@ with DAG(
         task_id="wait_for_last_transform",
         external_dag_id="transform_weather_dag",
         external_task_id="transform_weather",
-        execution_delta=timedelta(minutes=10),  # same logical date
+        # execution_delta=timedelta(minutes=10),  # same logical date
+        execution_date_fn=map_to_midnight,
         timeout=600,       # give up after 10 minutes if not done
         poke_interval=20,  # check every 60s
         mode="poke",       # or "reschedule" to free up workers
