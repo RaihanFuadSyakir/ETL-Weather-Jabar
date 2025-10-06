@@ -179,11 +179,12 @@ def process(**context):
     dag_times["end"] = context["data_interval_end"].astimezone(pytz.timezone("Asia/Jakarta")).strftime("%Y-%m-%d %H:%M:%S")
     date = context["dag_run"].logical_date.astimezone(pytz.timezone("Asia/Jakarta")) 
     dag_times["logical_date"] = date.strftime("%Y-%m-%d %H:%M:%S")
-    if date.minute != 0:
-        print(f"no execute at {dag_times['logical_date']} it should be done hourly")
-        return
     collection.create_index("dag_times.end")
     if is_follow_up_run:
+        # follow up run only done per hour
+        if date.minute != 0:
+            print(f"no execute at {dag_times['logical_date']} it should be done hourly")
+            return
         print(f"executed at {dag_times['logical_date']}")
         fetch_and_store_history_data(dag_times,date,date.hour)
     else:
